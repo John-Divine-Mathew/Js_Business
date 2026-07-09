@@ -1,27 +1,15 @@
-import ProductForm from "../components/product/ProductForm";
-import ProductList from "../components/product/ProductList";
-import ProductSearch from "../components/product/ProductSearch";
-
 export default function Products() {
   return (
-    <div className="space-y-6">
-
-      <div>
-        <h1 className="text-3xl font-bold">
-          Products
+    <div className="flex items-center justify-center h-[70vh]">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-green-700">
+          Product Module Removed
         </h1>
 
-        <p className="text-gray-500">
-          Manage all flour products
+        <p className="text-gray-500 mt-3">
+          Product management will be handled from Settings later.
         </p>
       </div>
-
-      <ProductSearch />
-
-      <ProductForm />
-
-      <ProductList />
-
     </div>
   );
 }

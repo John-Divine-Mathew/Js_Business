@@ -8,7 +8,6 @@ import MainLayout from "../layouts/MainLayout";
 
 import Dashboard from "../pages/Dashboard";
 import Customers from "../pages/Customers";
-import Products from "../pages/Products";
 import Calendar from "../pages/Calendar";
 import Reports from "../pages/Reports";
 import Settings from "../pages/Settings";
@@ -29,11 +28,6 @@ export default function AppRoutes() {
           <Route
             path="/customers"
             element={<Customers />}
-          />
-
-          <Route
-            path="/products"
-            element={<Products />}
           />
 
           <Route

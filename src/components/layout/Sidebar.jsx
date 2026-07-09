@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import {
   FaHouse,
   FaUsers,
-  FaBoxOpen,
   FaCalendarDays,
   FaChartColumn,
   FaGear,
@@ -12,7 +11,6 @@ import {
 const menus = [
   { name: "Dashboard", icon: <FaHouse />, path: "/" },
   { name: "Customers", icon: <FaUsers />, path: "/customers" },
-  { name: "Products", icon: <FaBoxOpen />, path: "/products" },
   { name: "Calendar", icon: <FaCalendarDays />, path: "/calendar" },
   { name: "Reports", icon: <FaChartColumn />, path: "/reports" },
   { name: "Settings", icon: <FaGear />, path: "/settings" },

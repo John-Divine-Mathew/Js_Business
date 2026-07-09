@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import {
   FaHouse,
   FaUsers,
-  FaBoxOpen,
   FaChartColumn,
 } from "react-icons/fa6";
 
@@ -17,11 +16,7 @@ const menus = [
     icon: <FaUsers />,
     name: "Customers",
   },
-  {
-    path: "/products",
-    icon: <FaBoxOpen />,
-    name: "Products",
-  },
+  
   {
     path: "/reports",
     icon: <FaChartColumn />,
