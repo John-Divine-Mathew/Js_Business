@@ -1,0 +1,64 @@
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import MainLayout from "../layouts/MainLayout";
+
+import Dashboard from "../pages/Dashboard";
+import Customers from "../pages/Customers";
+import Products from "../pages/Products";
+import Calendar from "../pages/Calendar";
+import Reports from "../pages/Reports";
+import Settings from "../pages/Settings";
+import Profile from "../pages/Profile";
+
+export default function AppRoutes() {
+  return (
+    <BrowserRouter>
+      <Routes>
+
+        <Route element={<MainLayout />}>
+
+          <Route
+            path="/"
+            element={<Dashboard />}
+          />
+
+          <Route
+            path="/customers"
+            element={<Customers />}
+          />
+
+          <Route
+            path="/products"
+            element={<Products />}
+          />
+
+          <Route
+            path="/calendar"
+            element={<Calendar />}
+          />
+
+          <Route
+            path="/reports"
+            element={<Reports />}
+          />
+
+          <Route
+            path="/settings"
+            element={<Settings />}
+          />
+
+          <Route
+            path="/profile"
+            element={<Profile />}
+          />
+
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
+  );
+}
