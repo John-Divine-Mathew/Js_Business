@@ -2,31 +2,34 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const CustomerContext = createContext();
 
-export const CustomerProvider = ({ children }) => {
+export function CustomerProvider({ children }) {
   const [customers, setCustomers] = useState(() => {
-    const data = localStorage.getItem("customers");
-
-    return data ? JSON.parse(data) : [];
+    const saved = localStorage.getItem("js_business_customers");
+    return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem("customers", JSON.stringify(customers));
+    localStorage.setItem(
+      "js_business_customers",
+      JSON.stringify(customers)
+    );
   }, [customers]);
 
   const addCustomer = (customer) => {
     const newCustomer = {
       id: Date.now(),
       ...customer,
+      createdAt: new Date().toISOString(),
     };
 
     setCustomers((prev) => [newCustomer, ...prev]);
   };
 
-  const updateCustomer = (updatedCustomer) => {
+  const updateCustomer = (id, updatedData) => {
     setCustomers((prev) =>
       prev.map((customer) =>
-        customer.id === updatedCustomer.id
-          ? updatedCustomer
+        customer.id === id
+          ? { ...customer, ...updatedData }
           : customer
       )
     );
@@ -50,6 +53,8 @@ export const CustomerProvider = ({ children }) => {
       {children}
     </CustomerContext.Provider>
   );
-};
+}
 
-export const useCustomers = () => useContext(CustomerContext);
+export function useCustomers() {
+  return useContext(CustomerContext);
+}

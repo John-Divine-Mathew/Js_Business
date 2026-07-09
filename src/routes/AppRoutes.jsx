@@ -26,8 +26,6 @@ export default function AppRoutes() {
 
       <Route path="/saved-customers" element={<SavedCustomers />} />
 
-      <Route path="/customers" element={<Customers />} />
-
       <Route path="/calendar" element={<Calendar />} />
 
       <Route path="/reports" element={<Reports />} />

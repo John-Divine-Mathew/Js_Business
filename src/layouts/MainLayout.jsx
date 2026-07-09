@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/layout/Sidebar";
-import Header from "../components/layout/Header";
+import Navbar from "../components/layout/Navbar";
 import BottomNav from "../components/layout/BottomNavigation";
 
 export default function MainLayout() {
@@ -9,7 +9,7 @@ export default function MainLayout() {
       <Sidebar />
 
       <div className="flex-1 flex flex-col">
-        <Header />
+        <Navbar />
 
         <main className="flex-1 p-6 pb-24 md:pb-6">
           <Outlet />

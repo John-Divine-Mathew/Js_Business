@@ -4,17 +4,17 @@ export default function DashboardTable() {
   const { customers } = useCustomers();
 
   return (
-    <div className="overflow-x-auto rounded-xl bg-white shadow">
-      <table className="min-w-full text-sm">
+    <div className="overflow-x-auto rounded-2xl bg-white shadow">
+      <table className="w-full">
         <thead className="bg-green-600 text-white">
           <tr>
-            <th className="px-4 py-3 text-left">S.No</th>
-            <th className="px-4 py-3 text-left">Name</th>
-            <th className="px-4 py-3 text-left">Packets</th>
-            <th className="px-4 py-3 text-left">Total</th>
-            <th className="px-4 py-3 text-left">Initial</th>
-            <th className="px-4 py-3 text-left">Balance</th>
-            <th className="px-4 py-3 text-left">Status</th>
+            <th className="p-3">S.No</th>
+            <th className="p-3">Name</th>
+            <th className="p-3">Packets</th>
+            <th className="p-3">Total</th>
+            <th className="p-3">Paid</th>
+            <th className="p-3">Balance</th>
+            <th className="p-3">Status</th>
           </tr>
         </thead>
 
@@ -23,30 +23,34 @@ export default function DashboardTable() {
             <tr>
               <td
                 colSpan={7}
-                className="px-4 py-8 text-center text-gray-500"
+                className="p-10 text-center text-gray-500"
               >
-                No customers available.
+                No Customers Found
               </td>
             </tr>
           ) : (
             customers.map((customer, index) => (
               <tr
                 key={customer.id}
-                className="border-b hover:bg-gray-50"
+                className="border-b"
               >
-                <td className="px-4 py-3">{index + 1}</td>
-                <td className="px-4 py-3">{customer.name}</td>
-                <td className="px-4 py-3">{customer.packets}</td>
-                <td className="px-4 py-3">₹{customer.total}</td>
-                <td className="px-4 py-3">₹{customer.initialAmount}</td>
-                <td className="px-4 py-3">₹{customer.balance}</td>
-                <td className="px-4 py-3">
+                <td className="p-3">{index + 1}</td>
+                <td className="p-3">{customer.name}</td>
+                <td className="p-3">{customer.packets}</td>
+                <td className="p-3">₹{customer.total}</td>
+                <td className="p-3">
+                  ₹{customer.initialAmount}
+                </td>
+                <td className="p-3">
+                  ₹{customer.balance}
+                </td>
+                <td className="p-3">
                   {customer.balance === 0 ? (
                     <span className="rounded bg-green-100 px-2 py-1 text-green-700">
                       Paid
                     </span>
                   ) : (
-                    <span className="rounded bg-yellow-100 px-2 py-1 text-yellow-700">
+                    <span className="rounded bg-red-100 px-2 py-1 text-red-700">
                       Pending
                     </span>
                   )}

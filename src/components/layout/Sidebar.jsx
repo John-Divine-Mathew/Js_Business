@@ -74,4 +74,3 @@ export default function Sidebar() {
     </aside>
   );
 }
-export default Sidebar;
