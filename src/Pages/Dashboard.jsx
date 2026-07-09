@@ -1,20 +1,49 @@
-import StatCard from "../components/common/StatCard";
+import DashboardTable from "../components/dashboard/DashboardTable";
+import { useCustomers } from "../context/CustomerContext";
 
 export default function Dashboard() {
+  const { customers } = useCustomers();
+
+  const totalCustomers = customers.length;
+
+  const totalSales = customers.reduce(
+    (sum, customer) => sum + Number(customer.total || 0),
+    0
+  );
+
+  const pendingAmount = customers.reduce(
+    (sum, customer) => sum + Number(customer.balance || 0),
+    0
+  );
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold">
         Dashboard
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-        <StatCard title="Today's Customers" value="0" />
-        <StatCard title="Today's Packages" value="0" />
-        <StatCard title="Today's Sales" value="₹0" />
-        <StatCard title="Yesterday Sales" value="₹0" />
-        <StatCard title="Monthly Sales" value="₹0" />
-        <StatCard title="Total Customers" value="0" />
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="rounded-xl bg-white p-5 shadow">
+          <h2 className="text-gray-500">Customers</h2>
+          <p className="mt-2 text-3xl font-bold">{totalCustomers}</p>
+        </div>
+
+        <div className="rounded-xl bg-white p-5 shadow">
+          <h2 className="text-gray-500">Total Sales</h2>
+          <p className="mt-2 text-3xl font-bold text-green-600">
+            ₹{totalSales}
+          </p>
+        </div>
+
+        <div className="rounded-xl bg-white p-5 shadow">
+          <h2 className="text-gray-500">Pending</h2>
+          <p className="mt-2 text-3xl font-bold text-red-600">
+            ₹{pendingAmount}
+          </p>
+        </div>
       </div>
+
+      <DashboardTable />
     </div>
   );
 }
