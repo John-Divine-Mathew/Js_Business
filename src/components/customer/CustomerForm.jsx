@@ -1,117 +1,154 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-const products = [
-  {
-    name: "Idli Flour 1 Kg",
-    price: 50,
-  },
-  {
-    name: "Idli Flour 2 Kg",
-    price: 100,
-  },
-  {
-    name: "Dosa Flour 1 Kg",
-    price: 55,
-  },
-];
+import FormInput from "./FormInput";
+import FormButton from "./FormButton";
+
+import { useCustomers } from "../../context/CustomerContext";
 
 export default function CustomerForm() {
+  const navigate = useNavigate();
+
+  const { addCustomer } = useCustomers();
+
   const today = new Date().toISOString().split("T")[0];
 
   const [form, setForm] = useState({
-    customerName: "",
+    name: "",
+    location: "",
     phone: "",
-    village: "",
-    product: "",
-    packages: "",
-    price: "",
-    total: "",
+    packetPrice: "",
+    packets: "",
+    initialAmount: "",
+    total: 0,
+    balance: 0,
     deliveryDate: today,
   });
 
-  const handleProduct = (e) => {
-    const product = products.find(
-      (p) => p.name === e.target.value
-    );
+  const calculate = (data) => {
+    const price = Number(data.packetPrice || 0);
+    const packets = Number(data.packets || 0);
+    const paid = Number(data.initialAmount || 0);
 
-    setForm({
-      ...form,
-      product: product.name,
-      price: product.price,
-      total: product.price * (form.packages || 0),
-    });
+    const total = price * packets;
+    const balance = total - paid;
+
+    return {
+      ...data,
+      total,
+      balance,
+    };
   };
 
-  const handlePackages = (e) => {
-    const qty = Number(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    setForm({
-      ...form,
-      packages: qty,
-      total: qty * form.price,
-    });
+    setForm((prev) =>
+      calculate({
+        ...prev,
+        [name]: value,
+      })
+    );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      !form.name ||
+      !form.location ||
+      !form.phone ||
+      !form.packetPrice ||
+      !form.packets
+    ) {
+      toast.error("Please fill all required fields.");
+      return;
+    }
+
+    addCustomer(form);
+
+    toast.success("Customer saved successfully!");
+
+    navigate("/");
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow p-5 space-y-4">
-
-      <input
-        placeholder="Customer Name"
-        className="w-full border rounded-xl p-4"
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-5 rounded-2xl bg-white p-6 shadow"
+    >
+      <FormInput
+        label="Customer Name"
+        name="name"
+        value={form.name}
+        onChange={handleChange}
+        placeholder="Enter customer name"
       />
 
-      <input
-        placeholder="Phone Number"
-        className="w-full border rounded-xl p-4"
+      <FormInput
+        label="Location / Village"
+        name="location"
+        value={form.location}
+        onChange={handleChange}
+        placeholder="Enter village"
       />
 
-      <input
-        placeholder="Village"
-        className="w-full border rounded-xl p-4"
+      <FormInput
+        label="Mobile Number"
+        name="phone"
+        value={form.phone}
+        onChange={handleChange}
+        placeholder="9876543210"
       />
 
-      <select
-        onChange={handleProduct}
-        className="w-full border rounded-xl p-4"
-      >
-        <option>Select Product</option>
-
-        {products.map((p) => (
-          <option key={p.name}>
-            {p.name}
-          </option>
-        ))}
-      </select>
-
-      <input
+      <FormInput
+        label="Packet Price"
+        name="packetPrice"
         type="number"
-        placeholder="Packages"
-        onChange={handlePackages}
-        className="w-full border rounded-xl p-4"
+        value={form.packetPrice}
+        onChange={handleChange}
       />
 
-      <input
-        value={form.price}
-        readOnly
-        className="w-full border rounded-xl p-4 bg-gray-100"
+      <FormInput
+        label="Number of Packets"
+        name="packets"
+        type="number"
+        value={form.packets}
+        onChange={handleChange}
       />
 
-      <input
+      <FormInput
+        label="Initial Amount"
+        name="initialAmount"
+        type="number"
+        value={form.initialAmount}
+        onChange={handleChange}
+      />
+
+      <FormInput
+        label="Total Amount"
         value={form.total}
         readOnly
-        className="w-full border rounded-xl p-4 bg-green-100 font-bold"
       />
 
-      <input
+      <FormInput
+        label="Balance Amount"
+        value={form.balance}
+        readOnly
+      />
+
+      <FormInput
+        label="Delivery Date"
         type="date"
-        defaultValue={today}
-        className="w-full border rounded-xl p-4"
+        name="deliveryDate"
+        value={form.deliveryDate}
+        onChange={handleChange}
       />
 
-      <button className="w-full rounded-xl bg-green-600 text-white p-4 text-lg font-semibold">
-        Save Customer
-      </button>
-
-    </div>
+      <FormButton
+        title="Save & Move to Dashboard"
+      />
+    </form>
   );
 }

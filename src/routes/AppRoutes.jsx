@@ -11,48 +11,33 @@ import Customers from "../pages/Customers";
 import Calendar from "../pages/Calendar";
 import Reports from "../pages/Reports";
 import Settings from "../pages/Settings";
-import Profile from "../pages/Profile";
+import NewCustomer from "../pages/NewCustomer";
+import SavedCustomers from "../pages/SavedCustomers";
 
 export default function AppRoutes() {
   return (
-    <BrowserRouter>
-      <Routes>
+<BrowserRouter>
+  <Routes>
 
-        <Route element={<MainLayout />}>
+    <Route element={<MainLayout />}>
 
-          <Route
-            path="/"
-            element={<Dashboard />}
-          />
+      <Route path="/" element={<Dashboard />} />
 
-          <Route
-            path="/customers"
-            element={<Customers />}
-          />
+      <Route path="/new-customer" element={<NewCustomer />} />
 
-          <Route
-            path="/calendar"
-            element={<Calendar />}
-          />
+      <Route path="/saved-customers" element={<SavedCustomers />} />
 
-          <Route
-            path="/reports"
-            element={<Reports />}
-          />
+      <Route path="/customers" element={<Customers />} />
 
-          <Route
-            path="/settings"
-            element={<Settings />}
-          />
+      <Route path="/calendar" element={<Calendar />} />
 
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
+      <Route path="/reports" element={<Reports />} />
 
-        </Route>
+      <Route path="/settings" element={<Settings />} />
 
-      </Routes>
-    </BrowserRouter>
+    </Route>
+
+  </Routes>
+</BrowserRouter>
   );
 }
