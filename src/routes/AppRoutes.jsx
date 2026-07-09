@@ -7,12 +7,11 @@ import {
 import MainLayout from "../layouts/MainLayout";
 
 import Dashboard from "../pages/Dashboard";
-import Customers from "../pages/Customers";
+import NewCustomer from "../pages/NewCustomer";
+import SavedCustomers from "../pages/SavedCustomers";
 import Calendar from "../pages/Calendar";
 import Reports from "../pages/Reports";
 import Settings from "../pages/Settings";
-import NewCustomer from "../pages/NewCustomer";
-import SavedCustomers from "../pages/SavedCustomers";
 
 export default function AppRoutes() {
   return (

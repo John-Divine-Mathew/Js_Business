@@ -1,52 +1,77 @@
-import { NavLink } from "react-router-dom";
 import {
-  FaHouse,
-  FaUsers,
-  FaCalendarDays,
-  FaChartColumn,
-  FaGear,
-  FaUser,
-} from "react-icons/fa6";
+  LayoutDashboard,
+  UserPlus,
+  Users,
+  CalendarDays,
+  FileBarChart2,
+  Settings
+} from "lucide-react";
+
+import { NavLink } from "react-router-dom";
 
 const menus = [
-  { name: "Dashboard", icon: <FaHouse />, path: "/" },
-  { name: "Customers", icon: <FaUsers />, path: "/customers" },
-  { name: "Calendar", icon: <FaCalendarDays />, path: "/calendar" },
-  { name: "Reports", icon: <FaChartColumn />, path: "/reports" },
-  { name: "Settings", icon: <FaGear />, path: "/settings" },
-  { name: "Profile", icon: <FaUser />, path: "/profile" },
+  {
+    title: "Dashboard",
+    path: "/",
+    icon: LayoutDashboard
+  },
+  {
+    title: "New Customer",
+    path: "/new-customer",
+    icon: UserPlus
+  },
+  {
+    title: "Saved Customers",
+    path: "/saved-customers",
+    icon: Users
+  },
+  {
+    title: "Calendar",
+    path: "/calendar",
+    icon: CalendarDays
+  },
+  {
+    title: "Reports",
+    path: "/reports",
+    icon: FileBarChart2
+  },
+  {
+    title: "Settings",
+    path: "/settings",
+    icon: Settings
+  }
 ];
 
 export default function Sidebar() {
   return (
-    <aside className="hidden md:flex w-64 bg-white border-r border-gray-200 flex-col">
-      <div className="p-6 border-b">
-        <h1 className="text-2xl font-bold text-green-700">
-          🌾 JS Business
-        </h1>
-        <p className="text-sm text-gray-500 mt-1">
-          Daily Supply Register
-        </p>
+    <aside className="hidden md:flex w-64 bg-green-700 text-white min-h-screen flex-col">
+      <div className="p-6 text-2xl font-bold border-b border-green-600">
+        🌾 JS Business
       </div>
 
-      <nav className="flex-1 p-4 space-y-2">
-        {menus.map((menu) => (
-          <NavLink
-            key={menu.path}
-            to={menu.path}
-            className={({ isActive }) =>
-              `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
-                isActive
-                  ? "bg-green-600 text-white"
-                  : "text-gray-700 hover:bg-green-100"
-              }`
-            }
-          >
-            {menu.icon}
-            <span>{menu.name}</span>
-          </NavLink>
-        ))}
+      <nav className="flex-1 p-3 space-y-2">
+        {menus.map((menu) => {
+          const Icon = menu.icon;
+
+          return (
+            <NavLink
+              key={menu.path}
+              to={menu.path}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
+                  isActive
+                    ? "bg-white text-green-700 font-semibold"
+                    : "hover:bg-green-600"
+                }`
+              }
+            >
+              <Icon size={20} />
+              {menu.title}
+            </NavLink>
+          );
+        })}
       </nav>
     </aside>
   );
 }
+export default Sidebar;

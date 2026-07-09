@@ -17,3 +17,4 @@ export default function NewCustomer() {
     </div>
   );
 }
+export default NewCustomer;
